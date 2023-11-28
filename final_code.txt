@@ -1,0 +1,170 @@
+drop table Billing4;
+drop table Room4;
+drop table Department4;
+drop table Staff4;
+drop table Appointments4;
+drop table Doctors4;
+drop table Patients4;
+
+CREATE TABLE Patients4(
+    PatientID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Age INT,
+    Gender VARCHAR(50),
+    Phone VARCHAR(15),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Doctors4(
+    DoctorID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    PhoneNum VARCHAR(15),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Appointments4 (
+    AppointmentID INT PRIMARY KEY,
+    PatientID INT,
+    DoctorID INT,
+    GivenTime VARCHAR(50),
+    FOREIGN KEY (PatientID) REFERENCES Patients4(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctors4(DoctorID)
+);
+
+CREATE TABLE Staff4 (
+    StaffID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Role VARCHAR(50),
+    Num VARCHAR(15),
+    Address VARCHAR(255)
+);
+CREATE TABLE Department4(
+    DeptID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Head VARCHAR(50),
+    DoctorsNum INT
+);
+
+CREATE TABLE Room4(
+    RoomNum INT PRIMARY KEY,
+    PatientID INT,
+    Type VARCHAR(50),
+    Status VARCHAR(50),
+    FOREIGN KEY (PatientID) REFERENCES Patients4(PatientID)
+);
+CREATE TABLE Billing4(
+    BillID INT PRIMARY KEY,
+    PatientID INT,
+    Amount Number(20),
+    PaymentStatus VARCHAR(20),
+    FOREIGN KEY (PatientID) REFERENCES Patients4(PatientID)
+);
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0571,'Aysha Hossain',67, '01613082001', 'Female','Amberkhana');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0572,'Ariyan Rahman',32, '01765829232', 'Male','Shahi Eidgah');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0573,'Sumaiya Tasnim',40, '01816941232', 'Female','Khadim');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0574,'Rafa Rahman',23, '01847364777', 'Female','Mejortilla');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0575,'Alvi Ahmed', 29, '01696075846', 'Male','Mejortilla');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0576,'Rina Akter', 50, '01790867564', 'Female','Mejortilla');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0577,'Shameem Hossen', 36, '01800097865', 'Male','Mejortilla');
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0578,'Suraiya Anisa', 26, '01688885640', 'Female','Mejortilla');
+
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1011,'Dr. Yousuf Ali', '01684976748', 'Khulna');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1012,'Dr. Yusra Newaz', '01664785936', 'Sylhet');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1013,'Dr. Lili Renu', '0179473593', 'Sylhet');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1014,'Dr. Yusha Ferdous', '01895038574', 'Dhaka');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1015,'Dr. Sameera Ali', '01696058694', 'Sylhet');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1016,'Dr. Iffat Hossain', '01986048564', 'Sylhet');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1017,'Dr. Nihal Rahman', '015960847669', 'Dhaka');
+INSERT INTO Doctors4(DoctorID, Name, PhoneNum, Address) VALUES (1018,'Dr. Zana Haque', '01699986756', 'Dhaka');
+
+INSERT INTO Appointments4(AppointmentID, PatientID, DoctorID, GivenTime) VALUES (100065, 0571, 1011, '2023-11-12');
+INSERT INTO Appointments4(AppointmentID, PatientID, DoctorID, GivenTime) VALUES (100066, 0573, 1012, '2023-11-14');
+INSERT INTO Appointments4(AppointmentID, PatientID, DoctorID, GivenTime) VALUES (100067, 0572, 1013, '2023-11-13');
+INSERT INTO Appointments4(AppointmentID, PatientID, DoctorID, GivenTime) VALUES (100068, 0574, 1014, '2023-11-15');
+
+INSERT INTO Staff4(StaffID, Name, Role, Num, Address) VALUES (701,'Rajon Shaha', 'Nurse', '01673894729', 'Sylhet');
+INSERT INTO Staff4(StaffID, Name, Role, Num, Address) VALUES (702,'Mary Gomez', 'Nurse', '016947566385', 'Sylhet');
+INSERT INTO Staff4(StaffID, Name, Role, Num, Address) VALUES (703,'Kutub Ali', 'Cashier', '01846384756', 'Sylhet');
+INSERT INTO Staff4(StaffID, Name, Role, Num, Address) VALUES (704,'Rakib Ahmed', 'Receptionist', '01765743803', 'Sylhet');
+
+INSERT INTO Department4(DeptID, Name, Head, DoctorsNum ) VALUES (09, 'Physiology', 'Dr. Yousuf Ali', 8);
+INSERT INTO Department4(DeptID, Name, Head, DoctorsNum ) VALUES (10, 'Cardiology', 'Dr. Yusra Newaz', 6);
+INSERT INTO Department4(DeptID, Name, Head, DoctorsNum ) VALUES (11, 'Neurology', 'Dr. Lili Renu', 4);
+INSERT INTO Department4(DeptID, Name, Head, DoctorsNum ) VALUES (12, 'Gynecology', 'Dr. Yusha Ferdous', 5);
+
+
+
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (101, 0571, 'single', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (102, 0572, 'single', 'occupied');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (103, 0573, 'shared', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (104, 0574, 'shared', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (105, 0575, 'shared', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (106, 0576, 'shared', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (107, 0577, 'shared', 'empty');
+INSERT INTO Room4(RoomNum, PatientID, Type, Status ) VALUES (108, 0578, 'shared', 'empty');
+
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(902, 0571, 20000, 'Paid');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(903, 0572, 15000, 'Pending');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(904, 0573, 10500, 'Paid');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(905, 0574, 50000, 'Pending');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(906, 0575, 2000, 'Paid');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(907, 0576, 40000, 'Paid');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(908, 0577, 8000, 'Pending');
+INSERT INTO Billing4(BillID, PatientID, Amount, PaymentStatus) Values(909, 0578, 25000, 'Pending');
+
+set pagesize 800
+set linesize 800
+
+--display tables
+select * from Patients4;
+select * from Doctors4;
+select * from Appointments4;
+select * from Staff4;
+select * from Department4;
+select * from Room4;
+select * from Billing4;
+
+--Query and nested query
+select * from Appointments4 where DoctorID=1011;
+select * from Appointments4 where DoctorID=(select DoctorID from Appointments4 where GivenTime='2023-11-13');
+
+--insert and delete
+INSERT INTO Patients4(PatientID, Name, Age, Gender, Phone, Address) VALUES (0579,'Disha Chy', 35, '01675849503', 'Female','Amberkhana');
+select * from Patients4;
+delete from Patients4 where PatientID=0579;
+select * from Patients4;
+
+
+--with clause
+with max_doctor(val) as (select max(DoctorsNum) from Department4)
+select * from Department4,max_doctor where Department4.DoctorsNum=max_doctor.val;
+
+
+--aggregate functions
+select count(*) as TOTAL_NO_OF_DOCTORS from Department4;
+select avg(Amount) as AVG_BILL from Billing4;
+select sum(Amount) as Total_Bill from Billing4;
+select max(Amount) from Billing4;
+select min(Amount) from Billing4;
+
+
+--Group by and having
+select Name,avg(Age) from Patients4 group by Name having avg(Age)>30;
+select PatientID, Name,avg(Age) from Patients4 group by PatientID, Name having avg(Age)>30;
+ 
+
+--set membership(and,or,not)
+select * from Department4 where Name like '%C%' or DeptID in (select DeptID from Department4 where DeptID=12);
+
+
+--string operation
+select * from Staff4 where Name like 'R%';
+select * from Staff4 where Name like '%a';
+
+
+--some and all
+select * from Patients4 where Age> some(select Age from Patients4 where Age>=50);
+select * from Patients4 where Age> all(select Age from Patients4 where Age>=23);
+
+--Join operation
+select * from Patients4 natural join Billing4 where PatientID=0571;
